@@ -1,0 +1,61 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <div class="table">
+        <div class="room-list">
+            <h1>Available Rooms</h1>
+            <p>Check-in: {{ check_in_date }} | Check-out: {{ check_out_date }}</p>
+
+            <p>Please choose a room:</p>
+
+        <ul>
+            {% for room in available_rooms %}
+            <li>
+                <a href="{% url 'room_detail' room_id=room.id %}">
+                    {{ room.room_type }} 
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>    
+</div>
+
+<style>
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url('{% static "images/LM2-a-ret.webjpg-1.jpg" %}');
+    }
+
+    .room-list {
+        text-align: center;
+    }
+
+    .room-list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .room-list li {
+        margin: 10px 0;
+    }
+ 
+    .table {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        height: 300px;
+        width: 500px;
+        background-color: white;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        font-size: 17px;
+    }    
+</style>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main">
+    <div class="room-images" style="display: flex; flex-wrap: wrap; gap: 10px;">
+        {% for image in room.images.all %}
+            <img src="/media/{{ image.image }}" alt="{{ room.room_type }} image" style="width: 200px;">
+        {% endfor %}
+    </div>
+    <div class="info">
+
+        <div class="card" style="width: 35rem;">
+            <div class="card-header">
+                <div class="logo3">
+                    <img src='{% static "images/LOGO-horizontal-768x208.png" %}' height="80px">
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Check-in: </b>{{ check_in_date }} | <b>Check-out:</b> {{ check_out_date }}</li>
+              <li class="list-group-item"><b>Room: </b>{{ room.room_type }}<i class="fa-solid fa-children"></i></li>
+              <li class="list-group-item"><b>Room number: </b>{{ room.room_number }}<i class="fa-solid fa-door-open"></i></li>
+              <li class="list-group-item"><b>Room size: </b>{{ room.chalet_size }}</li>
+              <li class="list-group-item"><b>Bed:</b> {{ room.beds }}<i class="fa-solid fa-bed"></i></li>
+              <li class="list-group-item"><b>Total price:</b> {{ total_price }}$ <i class="fa-regular fa-credit-card"></i></li>
+              <li class="list-group-item"><form action="{% url 'book_room' room_id=room.id %}" method="post">
+                {% csrf_token %}
+                <label for="number_of_guests">Number of Guests:</label>
+                <i class="fas fa-user"></i>
+                <input type="number" name="number_of_guests" min="1" max="{{ room.max_guests }}" required>
+                <button type="button" class="btn btn-outline-secondary">Book Room</button>
+            </form></li>
+            </ul>
+          </div>
+        
+    </div>
+</div>
+
+<style>
+    .main {
+    
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        font-size: 17px;
+ 
+    }
+    .info, .room-images {
+        margin-top: 80px;
+        flex: 1;
+    }
+    .logo3  {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .logo3 img{
+        color: #4682B4;
+        filter: sepia(1) hue-rotate(190deg);
+    }
+    i {
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+   
+</style>
+
+{% endblock %}
