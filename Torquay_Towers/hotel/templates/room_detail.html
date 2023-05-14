@@ -29,7 +29,9 @@
                 <input type="number" name="number_of_guests" min="1" max="{{ room.max_guests }}" required>
                 <button type="submit" class="btn btn-outline-secondary">Book Room</button>
             </form></li>
+            <a href="{% url 'booking_details' %}">View Details</a>
             </ul>
+
           </div>
         
     </div>

@@ -55,19 +55,22 @@ class Booking(models.Model):
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     number_of_guests = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.user.username} - {self.room.room_number} - {self.room.room_type} - {self.check_in_date} - {self.check_out_date}"
-
-
+    
+  
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField()
     comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.room.room_type} - {self.rating}"
+    
 
 class InfoRequest(models.Model):
     name = models.CharField(max_length=255)

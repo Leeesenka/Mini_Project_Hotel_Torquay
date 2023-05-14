@@ -1,0 +1,63 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="booking-details">
+    <div class="welcome">
+        <h2>Welcome, {{ request.user.username }}</h2>
+    </div>
+    <h3>Your Bookings:</h3>
+    <table class="table-primary">
+        <thead>
+            <tr class="table-primary">
+                <th>Room Type</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Number of Guests</th>
+                <th>Total price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in user_bookings %}
+            <tr>
+                <td>{{ booking.room.room_type }}</td>
+                <td>{{ booking.check_in_date }}</td>
+                <td>{{ booking.check_out_date }}</td>
+                <td>{{ booking.number_of_guests }}</td>
+                <td>{{ booking.total_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .booking-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+
+    .welcome {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock %}

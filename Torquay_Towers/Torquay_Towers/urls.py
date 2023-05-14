@@ -10,8 +10,8 @@ from accounts.views import (ProfileView,
                     SignUpView,
                     profile_redirect_view,
                     )
-from hotel.views import index, room_detail, calculate_total_price, search_availability, room_selection, book_room
-
+from hotel.views import index, room_detail, calculate_total_price, search_availability, room_selection, book_room, hotel_info, submit_review, booking_details
+app_name = 'hotel'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
@@ -26,7 +26,9 @@ urlpatterns = [
     # path('calculate_price/<int:room_id>/', calculate_price_view, name='calculate_price'),
     path('calculate_total_price/', calculate_total_price, name='calculate_total_price'),
     path('staff/', include('staff.urls') ),
-
+    path('index/', hotel_info, name='hotel_info'),
+    path('submit_review/', submit_review, name='submit_review'),
+    path('booking_details/', booking_details, name='booking_details'),
 
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
