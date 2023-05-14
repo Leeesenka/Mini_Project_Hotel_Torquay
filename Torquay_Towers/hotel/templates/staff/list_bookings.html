@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<style>
+    .div {
+        margin-top: 100px
+       
+    }
+
+</style>
+
+
+<div class='div'>
+  <a href='{%url 'staff_create_booking' %}'><button type="button" class="btn btn-success">Create new booking</button></a>
+       
+    <table class="table table-success table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Guest name</th>
+            <th scope="col">Room №</th>
+            <th scope="col">Check in date</th>
+            <th scope="col">Check out date</th>
+            <th scope="col">Number of guests</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings%}
+          <tr>
+            <th>{{booking.user}}</th>
+            <td>{{booking.room}}</td>
+            <td>{{booking.check_in_date}}</td>
+            <td>{{booking.check_out_date}}</td>
+            <td>{{booking.number_of_guests}}</td>
+            <td><a href='{%url 'detail_booking' booking.id%}'><button type="button" class="btn btn-warning">Details</button></a></td>
+
+          </tr>
+          {%endfor%}
+          
+        </tbody>
+      </table>
+         
+    
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<style>
+    .div {
+        margin-top: 100px
+       
+    }
+
+</style>
+
+<div class='div'>
+    <table class="table table-success table-striped">
+      
+   
+          
+          <tr>
+            
+          <form method="post">{% csrf_token %}
+              {{ form }}
+              <input type="submit" value="Edit" class="btn btn-success">
+          </form> 
+
+          </tr>
+          
+      </table>
+      
+</div>
+{% endblock %}
