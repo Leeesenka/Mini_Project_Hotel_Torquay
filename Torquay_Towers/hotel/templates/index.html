@@ -86,6 +86,26 @@
         </div>
       
     </div>
+    
+</div>
+<div class="reviews">
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <div class="review">
+            <h3>{{ review.user.username }}</h3>
+            <p>Rating: {{ review.rating }}/5</p>
+            <p>{{ review.comment }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="review-form">
+    <h2>Leave a review</h2>
+    <form method="post" action="{% url 'hotel_info' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
 </div>
 <style>
     .main {

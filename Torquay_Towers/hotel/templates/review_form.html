@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .review-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    
+    .review-form {
+        background-color: #f8f9fa;
+        padding: 40px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .review-form input[type="number"],
+    .review-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .review-form input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .review-form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="review-form-container">
+    <div class="review-form">
+        <form method="post" action="{% url 'submit_review' %}">
+            {% csrf_token %}
+            <label for="booking_id">Select Booking Number:</label>
+            <select name="booking_id" required>
+                {% for booking in bookings %}
+                    <option value="{{ booking.id }}">Booking Number: {{ booking.id }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="rating">Rating:</label>
+            <input type="number" name="rating" min="1" max="5" required>
+            <br>
+            <label for="comment">Comment:</label>
+            <textarea name="comment" rows="4" cols="50" required></textarea>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        
+    </div>
+</div>
+
+{% endblock %}
+

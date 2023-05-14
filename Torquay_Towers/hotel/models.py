@@ -65,6 +65,7 @@ class Review(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField()
     comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.room.room_type} - {self.rating}"
