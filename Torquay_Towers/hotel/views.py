@@ -70,7 +70,7 @@ def book_room(request, room_id):
         check_in_date = request.session.get('check_in_date')
         check_out_date = request.session.get('check_out_date')
 
-        if check_in_date is None or check_out_date is None:
+        if not check_in_date or not check_out_date:
             messages.error(request, 'Please select check-in and check-out dates before booking a room.')
             return redirect('index')
 
@@ -83,13 +83,16 @@ def book_room(request, room_id):
             messages.error(request, 'Please enter the number of guests before booking a room.')
             return redirect('index')
 
-        booking = Booking(room=room, user=user, check_in_date=check_in_date, check_out_date=check_out_date, number_of_guests=number_of_guests)
+        total_price = calculate_total_price(check_in_date, check_out_date, room.price_per_night)
+
+        booking = Booking(room=room, user=user, check_in_date=check_in_date, check_out_date=check_out_date, number_of_guests=number_of_guests, total_price=total_price)
         booking.save()
 
         messages.success(request, 'Your room has been successfully booked!')
         return redirect('index')
     else:
         return redirect('room_detail', room_id=room_id)
+
     
 
 def hotel_info(request):
