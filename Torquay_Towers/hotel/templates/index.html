@@ -31,25 +31,60 @@
         </div>
         <div class="two">
             <div class="name-two">
-                <p>Accès direct à la plage de La Gaillarde</p>
+                <p>Direct access to the beach of La Gaillarde</p>
             </div>
             <div class="info-two">
                 <i class="fa-regular fa-comments"></i><p>04 94 96 93 55 <br>
                 info@campingpdc.fr</p>
             </div>
-            
-                
-          
+        
         </div>
         <div class="three">
-            3
+            <div class="info-three">
+                <i class="fa-solid fa-location-dot"></i>
+                <p> RD559 La Gaillarde Plage <br>83380 Les Issambres – Roquebrune sur Argens </p>
+            </div>
         </div>
         <div class="four">
-            4
+            <div class="border-1">
+                <div class="home-1">
+                    <i class="fa-solid fa-house"></i>
+                    <p>101 mobil-homes et lodges</p>
+                </div>
+                <div class="home-2">
+                    <i class="fa-solid fa-campground"></i>
+                    <p>91 emplacements</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="right">
-        2
+        <div class="logos">
+            <div class="logos-1">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <p>Direct access to the beach</p>
+            </div>
+            <div class="logos-1">
+                <i class="fa-solid fa-calendar-check"></i>
+                <p>Open all year round</p>
+            </div>
+            <div class="logos-1">
+                <i class="fa-solid fa-tree"></i>
+                <p>Direct access to the forest</p>
+            </div>
+            <div class="logos-1">
+                <i class="fa-solid fa-bicycle"></i>
+                <p>Bicycle lanes in the vicinity</p>
+            </div>
+        </div>
+        <div class="under-logos">
+            <h3>Welcome to the 4 star camping Au Paradis des Campeurs with direct access to the beach</h3>
+            <p>We invite you for a vacation in a unique and natural place!
+
+                Located in the heart of the French Riviera, Au Paradis des Campeurs has direct access to one of the most beautiful beaches of the French Riviera (Plage de la Gaillarde) and the forest. A guarantee of beauty, comfort and freshness. 11 kilometers from Sainte-Maxime and 30 minutes by boat from Saint-Tropez.
+                </p>
+        </div>
+      
     </div>
 </div>
 <style>
@@ -94,17 +129,18 @@
     }
 
     
-    /* * {
-    border: 1px solid red;
+     * {
+    /* border: 1px solid red; */
     font-family: 'Titillium Web';
     margin: 0;
     
-  } */
+  }
   .abought {
     display: flex;
     position: relative;
     flex-direction: row;
     height: 600px;
+    color: #191970;
   }
   .left, .right {
     flex: 1;
@@ -161,19 +197,78 @@
     font-size: 40px;
 
 }
-.two {
+.two, .three, .four {
     display: flex;
     position: relative;
     flex-direction: column;
     margin-left: 200px;
 }
-.two p {
-    color: black;
+.two p, .three p, .four p, .right p{
+    color: #191970;
+
 }
-.info-two {
+.info-two, .info-three {
     display: flex;
     flex-direction: row;
+    
+}
+.info-two i {
+    padding: 7px;
+    
 }
 
+.info-three i{
+    padding: 7px;
+}
+
+.border-1 {
+    border: 1px solid gray;
+    height: 80px;
+    width: 400px;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    padding: 5px;
+}
+.border-1 i{
+    font-size: 20px;
+}
+
+.home-1, .home-2 {
+    padding: 12px;
+}
+.right {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.logos {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.logos-1 {
+    padding: 20px;
+  text-align: center;
+}
+
+.logos-1 p {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.logos-1 i {
+    font-size: 30px;
+   
+}
+
+.right {
+ margin-left: 60px;
+ margin-right: 60px;
+}
+.under-logos p{
+    padding-top: 30px;
+}
 </style>
 {% endblock %}
