@@ -1,0 +1,43 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<style>
+    .table {
+        margin-top: 100px
+       
+    }
+
+</style>
+
+<div>
+    <table class="table table-success table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Guest name</th>
+            <th scope="col">Room №</th>
+            <th scope="col">Check in date</th>
+            <th scope="col">Check out date</th>
+            <th scope="col">Number of guests</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <th>{{info.user}}</th>
+            <td>{{info.room}}</td>
+            <td>{{info.check_in_date}}</td>
+            <td>{{info.check_out_date}}</td>
+            <td>{{info.number_of_guests}}</td>
+            <td><form method="post">{% csrf_token %}
+              {{ form }}
+              <input type="submit" class="btn btn-danger" value="Delete">
+              <a href='{%url 'edit_booking' info.id %}'><button type="button" class="btn btn-success">Update</button></a>
+          </form> </td>
+
+          </tr>
+          
+        </tbody>
+      </table>
+      
+</div>
+{% endblock %}

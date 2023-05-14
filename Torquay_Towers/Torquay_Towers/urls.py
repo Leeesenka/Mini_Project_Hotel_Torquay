@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
@@ -25,6 +25,7 @@ urlpatterns = [
     path('room_selection/', room_selection, name='room_selection'),
     # path('calculate_price/<int:room_id>/', calculate_price_view, name='calculate_price'),
     path('calculate_total_price/', calculate_total_price, name='calculate_total_price'),
+    path('staff/', include('staff.urls') ),
 
 
 
