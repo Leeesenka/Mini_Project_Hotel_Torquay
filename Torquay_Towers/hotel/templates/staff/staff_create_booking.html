@@ -1,0 +1,77 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main">
+   
+    <div class="table">
+        <h1>Create booking for client</h1>
+        <p>Select check-in and check-out dates:</p>
+        <form action="{% url 'staff_room_selection' %}" method="get">
+            <input type="date" name="check_in_date" min="{{ today }}" required>
+            <input type="date" name="check_out_date" min="{{ today }}" required>
+            <button type="submit">Search Availability</button>
+        </form>
+        
+    </div>
+</div>
+
+<style>
+    .main {
+        {% comment %} display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 100vh; {% endcomment %}
+        {% comment %} background-image: url('{% static "images/2.jpg" %}'); {% endcomment %}
+        {% comment %} background-size: cover; {% endcomment %}
+        {% comment %} background-position: center; {% endcomment %}
+        {% comment %} padding-bottom: 80px; {% endcomment %}
+        {% comment %} margin-top: 300px; {% endcomment %}
+    }
+
+    .table input {
+        margin: 5px;
+        padding: 5px;
+        font-size: 1rem;
+        
+    }
+    .table button {
+        background-color: white;
+        height: 30px;
+
+    }
+
+    .table h1, p {
+        color: black;
+        font-family: "Marcellus","Times",sans-serif;
+    }
+    .table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+       
+
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+       
+    }
+
+    
+    /* * {
+    border: 1px solid red;
+    font-family: 'Titillium Web';
+    margin: 0;
+    
+  } */
+  .abought {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    height: 600px;
+  }
+  
+
+</style>
+{% endblock %}
