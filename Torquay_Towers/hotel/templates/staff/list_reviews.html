@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<style>
+    .div {
+        margin-top: 100px
+       
+    }
+
+</style>
+
+
+<div class='div'>
+    
+    <table class="table table-success table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">User name</th>
+            <th scope="col">created_at</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews%}
+          <tr>
+            <th>{{review.user}}</th>
+            <td>{{review.created_at}}</td>
+            <td>{{review.rating}}</td>
+            <td><a href='{%url 'detail_review' review.id%}'><button type="button" class="btn btn-warning">Details</button></a></td>
+
+          </tr>
+          {%endfor%}
+          
+        </tbody>
+      </table>
+         
+    
+</div>
+{% endblock %}

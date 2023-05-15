@@ -40,10 +40,15 @@
             <a class="nav-link" href="{% url 'booking_details' %}">View Your Bookings</a>
           </li>
         </ul>
+        {%endif%}
         {% if user.is_superuser%}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_bookings'%}">Bookings</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_reviews'%}">Reviews</a>
+          </li>
+          
           {%endif%}
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
