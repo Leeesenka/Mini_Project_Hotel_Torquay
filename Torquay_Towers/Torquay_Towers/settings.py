@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'hotel',
+    'staff',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hotels',
         'USER': 'postgres',
-        'PASSWORD': 'S@mbation1',
+        'PASSWORD': 'Oi3msd4d907',
         'HOST': 'localhost',
         'PORT': '5432',
     }

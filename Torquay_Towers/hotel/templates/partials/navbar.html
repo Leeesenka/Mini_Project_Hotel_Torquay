@@ -21,7 +21,12 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'submit_review' %}">Review of the hotel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'booking_details' %}">View Your Bookings</a>
+          </li>
           
           {% else%}
           <li class="nav-item">
@@ -33,18 +38,14 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}">Login</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'submit_review' %}">Review of the hotel</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'booking_details' %}">View Your Bookings</a>
-          </li>
-        </ul>
+      
+          {%endif%}
         {% if user.is_superuser%}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_bookings'%}">Bookings</a>
           </li>
           {%endif%}
+        </ul>
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-success" type="submit">Search</button>
