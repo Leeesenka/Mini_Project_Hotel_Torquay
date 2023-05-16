@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView, DeleteView, UpdateView
-from hotel.models import Booking, Room, User
+from hotel.models import Booking, Room, User, Review
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -8,7 +8,6 @@ from hotel.forms import BookingForm
 from datetime import datetime
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 class ListBookings(UserPassesTestMixin, ListView):
@@ -62,6 +61,7 @@ def search_availability(request):
     request.session['check_out_date'] = check_out_date.isoformat()
 
     return redirect('staff_room_selection')
+
 @staff_member_required(login_url='login')
 def room_selection(request):
     check_in_date = request.session.get('check_in_date')
@@ -76,7 +76,6 @@ def room_selection(request):
 
     return render(request, 'staff/staff_available_rooms.html', {'available_rooms': available_rooms, 'check_in_date': check_in_date, 'check_out_date': check_out_date})
 
-@staff_member_required(login_url='login')
 def calculate_total_price(check_in_date, check_out_date, price_per_night):
     check_in = datetime.strptime(check_in_date, '%Y-%m-%d')
     check_out = datetime.strptime(check_out_date, '%Y-%m-%d')
@@ -106,18 +105,40 @@ def staff_book_room(request, room_id):
             return redirect('staff_create_booking')
 
         room = get_object_or_404(Room, id=room_id)
+        
         user = User.objects.get(id=request.POST.get('user')) 
-
+        total_price = calculate_total_price(check_in_date, check_out_date, room.price_per_night)
         number_of_guests = request.POST.get('number_of_guests')
 
         if number_of_guests is None:
             messages.error(request, 'Please enter the number of guests before booking a room.')
             return redirect('staff_create_booking')
 
-        booking = Booking(room=room, user=user, check_in_date=check_in_date, check_out_date=check_out_date, number_of_guests=number_of_guests)
+        booking = Booking(total_price=total_price, room=room, user=user, check_in_date=check_in_date, check_out_date=check_out_date, number_of_guests=number_of_guests)
         booking.save()
 
         messages.success(request, 'Your room has been successfully booked!')
         return redirect('list_bookings')
     else:
         return redirect('staff_room_booking', room_id=room_id)
+    
+class ReviewsView(UserPassesTestMixin ,ListView):
+    template_name = "staff/list_reviews.html"
+    model = Review
+    context_object_name = 'reviews'
+    ordering = ['created_at']
+   
+    def test_func(self):
+        return self.request.user.is_staff
+    
+class ReviewDetail(UserPassesTestMixin, SuccessMessageMixin, DeleteView, DetailView):
+    template_name = 'staff/detail_review.html'
+    context_object_name = 'info'
+    model = Review
+    success_url = reverse_lazy('list_reviews')
+    success_message = "The review was deleted"
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(ReviewDetail, self).delete(request, *args, **kwargs)
+    def test_func(self):
+        return self.request.user.is_staff 

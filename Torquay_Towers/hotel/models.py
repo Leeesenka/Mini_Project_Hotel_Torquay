@@ -39,10 +39,10 @@ class Room(models.Model):
 
 
 class Hotel(models.Model):
-    name_hotel =  models.CharField()
-    discription_hotel = models.CharField()
-    location_hotel = models.CharField()
-    environment_hotel = models.CharField()
+    name_hotel =  models.CharField(max_length=50)
+    discription_hotel = models.CharField(max_length=500)
+    location_hotel = models.CharField(max_length=500)
+    environment_hotel = models.CharField(max_length=500)
 
     def __str__(self):
         return self.name_hotel
